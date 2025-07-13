@@ -11,7 +11,8 @@ export const appStyle = StyleSheet.create({
     appBar: {
         width: '100%',
         height: 60,
-        justifyContent: 'center',
+        justifyContent: 'space-between',
+        flexDirection: "row",
         alignItems: 'center',
         backgroundColor: appColors.forebackground,
         paddingHorizontal: 16,
