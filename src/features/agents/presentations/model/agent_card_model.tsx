@@ -40,4 +40,5 @@ export interface AgentsState {
     error: string | null;
     total: number;
     page: number;
+    searchTerm: string
 }

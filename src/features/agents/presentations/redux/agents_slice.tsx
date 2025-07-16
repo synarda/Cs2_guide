@@ -8,6 +8,7 @@ const initialState: AgentsState = {
     error: null,
     total: 0,
     page: 1,
+    searchTerm: ""
 };
 
 export const fetchAgents = createAsyncThunk<Agent[], void>(
@@ -25,7 +26,11 @@ export const fetchAgents = createAsyncThunk<Agent[], void>(
 const agentsSlice = createSlice({
     name: 'agents',
     initialState,
-    reducers: {},
+    reducers: {
+        setSearchTerm: (state, action) => {
+            state.searchTerm = action.payload;
+        },
+    },
     extraReducers: builder => {
         builder
             .addCase(fetchAgents.pending, (state) => {
@@ -43,3 +48,5 @@ const agentsSlice = createSlice({
 });
 
 export default agentsSlice.reducer;
+
+export const { setSearchTerm } = agentsSlice.actions;

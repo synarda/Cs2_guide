@@ -1,12 +1,11 @@
 import { StyleSheet } from 'react-native';
-import appColors from '../../../../product/constants/colors';
-
+import appColors from '../../../../../product/constants/colors';
 export const AgentCardStyle = StyleSheet.create({
     agentCard: {
-        width: '100%', // '%100' yerine '100%' olmalı
-        margin: 16,
+        width: '100%',
+        marginVertical: 8,
         padding: 16,
-        alignItems: "flex-start", // alignContent yerine alignItems
+        alignItems: "flex-start",
         justifyContent: "flex-start",
         flexDirection: "row",
         backgroundColor: appColors.forebackground,
@@ -16,18 +15,25 @@ export const AgentCardStyle = StyleSheet.create({
         width: 100,
         height: 100,
         marginTop: 8,
-        flexShrink: 0, // Resmin küçülmesini engeller
+        flexShrink: 0,
     },
     textContainer: {
         flexDirection: "column",
-        flex: 1, // Kalan alanı kaplar
-        marginLeft: 12, // Resim ile metin arasında boşluk
-        overflow: 'hidden', // Taşan içeriği gizler
+        marginHorizontal: 12,
+        overflow: 'hidden',
+        flex: 1,
+        paddingRight: 8,
     },
     nameText: {
         marginBottom: 4,
     },
     descriptionText: {
         flex: 1,
+    },
+    teamTag: {
+        borderRadius: 16,
+        margin: 4,
+        padding: 4,
+
     }
 });
