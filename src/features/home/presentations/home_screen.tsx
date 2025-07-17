@@ -23,7 +23,7 @@ const HomeScreen = () => {
             <HomeScreenCardItem
                 title='Skins'
                 description='Click here to see all Skins in the game.'
-                path='Agents'
+                path='Skins'
                 photoUrl={imagesPaths.guns}
 
             ></HomeScreenCardItem>

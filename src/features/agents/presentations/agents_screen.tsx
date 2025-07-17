@@ -1,20 +1,27 @@
 import React, { useEffect } from 'react';
-import { View, Text, FlatList, ActivityIndicator, TextInput } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 import AppBar from '../../../product/components/appbar';
 import { appStyle } from '../../../product/styles/app_style';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchAgents, setSearchTerm } from './redux/agents_slice.tsx';
-import AgentCard from './components/agent_card/agent_card.tsx';
-import SearchArea from './components/search_area/search_area.tsx';
-import AppTypography from '../../../product/styles/app_typography.js';
+import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
+import { fetchAgents, setSearchTerm } from './redux/agents_slice';
+import AgentCard from './components/agent_card/agent_card';
+import AppTypography from '../../../product/styles/app_typography';
+import { Agent, AgentsState } from './model/agent_card_model';
+import SearchArea from '../../../product/components/search_area/search_area';
 
-const AgentsScreen = () => {
+type RootState = {
+    agents: AgentsState;
+};
+
+const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+const AgentsScreen: React.FC = () => {
     const dispatch = useDispatch();
-    const { data: agents, loading, error, searchTerm } = useSelector(state => state.agents);
+    const { data: agents, loading, error, searchTerm } = useTypedSelector(state => state.agents);
 
     useEffect(() => {
-        dispatch(fetchAgents());
+        dispatch(fetchAgents() as any);
     }, [dispatch]);
 
     const filteredAgents = agents.filter(agent =>
@@ -28,9 +35,11 @@ const AgentsScreen = () => {
             <AppBar title="Agents" />
 
             <View style={{ paddingHorizontal: 16 }}>
-                <SearchArea onChangeText={(text) => dispatch(setSearchTerm(text))}
+                <SearchArea
+                    labelText="Search agents..."
+                    onChangeText={(text) => dispatch(setSearchTerm(text))}
                     searchTerm={searchTerm}
-                ></SearchArea>
+                />
             </View>
 
             {error ? (
@@ -57,14 +66,13 @@ const AgentsScreen = () => {
                         }
                         ListEmptyComponent={
                             !loading && (
-                                <Text style={AppTypography.bodyLarge}>
+                                <Text style={AppTypography.bodyLarge_Bold}>
                                     No agents found
                                 </Text>
                             )
                         }
                     />
                 </View>
-
             )}
         </SafeAreaView>
     );
